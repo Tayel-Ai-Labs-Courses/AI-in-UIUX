@@ -10,6 +10,13 @@ template they copy to start.
 |---|---|---|
 | [final-project-1](final-project-1) | Design the interface for an AI automation tool (n8n) | Open |
 
+## For instructors, before project 1
+
+[`n8n-demo/`](n8n-demo) has three small workflows to teach n8n from, with
+the lesson and the questions to ask written on each canvas. Run them in the
+session before the brief goes out — the third one fails on purpose, and that
+failure is the project.
+
 ## For students
 
 Go into the project folder and read its `README.md` first. Then

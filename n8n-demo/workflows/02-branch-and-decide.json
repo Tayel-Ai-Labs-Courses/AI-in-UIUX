@@ -1,0 +1,193 @@
+{
+  "name": "02 \u2014 Branch and decide",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "t2",
+      "name": "When you click Execute",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "s3-0",
+              "name": "customer",
+              "value": "Mona",
+              "type": "string"
+            },
+            {
+              "id": "s3-1",
+              "name": "total",
+              "value": "={{ 210 }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "s3",
+      "name": "An order arrives",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        120,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cond-1",
+              "leftValue": "={{ $json.total }}",
+              "rightValue": 200,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if1",
+      "name": "Is it over 200 EGP?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        360,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "s4-0",
+              "name": "action",
+              "value": "notify manager",
+              "type": "string"
+            },
+            {
+              "id": "s4-1",
+              "name": "message",
+              "value": "={{ $json.customer }} spent {{ $json.total }} EGP",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "s4",
+      "name": "Big order \u2014 tell the manager",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        620,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "s5-0",
+              "name": "action",
+              "value": "log only",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "s5",
+      "name": "Normal order \u2014 just log it",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        620,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 2 \u2014 Workflows are not straight lines\n\nThe IF node splits the path. **true** leaves the top output, **false** leaves the bottom one.\n\nRun it once as-is. Then open *An order arrives*, change `total` to `50`, and run again. Watch which branch lights up.\n\n**Ask the room:** this workflow has two paths and already needs a second row. Real ones have fifteen. How do you show a customer which path their data took \u2014 without drawing the whole map?\n\nThat question is the canvas screen in the final project.",
+        "height": 380,
+        "width": 520,
+        "color": 4
+      },
+      "id": "k2",
+      "name": "Lesson",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        20
+      ]
+    }
+  ],
+  "connections": {
+    "When you click Execute": {
+      "main": [
+        [
+          {
+            "node": "An order arrives",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "An order arrives": {
+      "main": [
+        [
+          {
+            "node": "Is it over 200 EGP?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is it over 200 EGP?": {
+      "main": [
+        [
+          {
+            "node": "Big order \u2014 tell the manager",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Normal order \u2014 just log it",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

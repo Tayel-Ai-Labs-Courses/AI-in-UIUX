@@ -1,0 +1,153 @@
+{
+  "name": "01 \u2014 Hello automation",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "t1",
+      "name": "When you click Execute",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "s1-0",
+              "name": "customer",
+              "value": "Mona",
+              "type": "string"
+            },
+            {
+              "id": "s1-1",
+              "name": "drink",
+              "value": "Iced Latte",
+              "type": "string"
+            },
+            {
+              "id": "s1-2",
+              "name": "price",
+              "value": "={{ 85 }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "s1",
+      "name": "A customer places an order",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "s2-0",
+              "name": "customer",
+              "value": "={{ $json.customer }}",
+              "type": "string"
+            },
+            {
+              "id": "s2-1",
+              "name": "drink",
+              "value": "={{ $json.drink }}",
+              "type": "string"
+            },
+            {
+              "id": "s2-2",
+              "name": "total_with_tax",
+              "value": "={{ Math.round($json.price * 1.14) }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "s2",
+      "name": "Work out the total",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        360,
+        300
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "e1",
+      "name": "Done",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        600,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 1 \u2014 What a workflow actually is\n\nFour boxes, left to right. Data enters at the trigger and comes out changed at the end.\n\n**Run it, then click each node.** The panel splits in two: what came IN on the left, what went OUT on the right.\n\nThat split is the whole mental model. Every node takes data in and hands data out.\n\n**Ask the room:** where would a designer put the thing you are looking at? n8n puts it in a side panel over the canvas. Is that right?",
+        "height": 340,
+        "width": 520,
+        "color": 4
+      },
+      "id": "k1",
+      "name": "Lesson",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        -60
+      ]
+    }
+  ],
+  "connections": {
+    "When you click Execute": {
+      "main": [
+        [
+          {
+            "node": "A customer places an order",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "A customer places an order": {
+      "main": [
+        [
+          {
+            "node": "Work out the total",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Work out the total": {
+      "main": [
+        [
+          {
+            "node": "Done",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

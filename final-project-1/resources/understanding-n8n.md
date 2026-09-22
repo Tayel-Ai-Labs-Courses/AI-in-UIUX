@@ -5,7 +5,9 @@ hour in n8n. You will not write code — you will drag boxes and connect them.
 
 ## Getting in
 
-The instructor runs an n8n instance locally. Ask for access, or run your own:
+The instructor runs an n8n instance locally and will demo it in class using
+the three workflows in [`n8n-demo/`](../../n8n-demo). You can run your own
+copy too — it is one command and installs nothing permanently:
 
 ```bash
 npx n8n

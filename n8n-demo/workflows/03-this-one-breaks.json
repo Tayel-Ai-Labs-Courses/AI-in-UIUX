@@ -1,0 +1,126 @@
+{
+  "name": "03 \u2014 This one breaks on purpose",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "t3",
+      "name": "When you click Execute",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "s6-0",
+              "name": "customer",
+              "value": "Mona",
+              "type": "string"
+            },
+            {
+              "id": "s6-1",
+              "name": "total",
+              "value": "={{ 210 }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "s6",
+      "name": "An order arrives",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        120,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://this-host-does-not-exist.funzo.invalid/notify",
+        "options": {}
+      },
+      "id": "h1",
+      "name": "Send it to the shop system",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        380,
+        340
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "e3",
+      "name": "Order recorded",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        640,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 3 \u2014 This one breaks on purpose\n\nThe HTTP node points at a host that does not exist. Run it. It will fail.\n\n**Do not explain the error yet.** Let them read the screen cold for thirty seconds, then ask:\n\n- Which step broke?\n- Did the steps before it still run?\n- What is the customer supposed to do now?\n- Would you understand this at 3am?\n\nThen tell them: **this screen is deliverable 4 of your final project.** Screenshot it now.\n\nThis is the most useful ten minutes in the session. Everything n8n gets wrong here is what they get paid to fix.",
+        "height": 420,
+        "width": 540,
+        "color": 3
+      },
+      "id": "k3",
+      "name": "Lesson",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        -60
+      ]
+    }
+  ],
+  "connections": {
+    "When you click Execute": {
+      "main": [
+        [
+          {
+            "node": "An order arrives",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "An order arrives": {
+      "main": [
+        [
+          {
+            "node": "Send it to the shop system",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send it to the shop system": {
+      "main": [
+        [
+          {
+            "node": "Order recorded",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

@@ -9,10 +9,11 @@ they watch, and they screenshot.
 
 ## Before the session
 
-Start n8n on your machine:
+Start n8n on your machine — **not** plain `npx n8n`, see the section at the
+bottom for why:
 
 ```bash
-npx n8n
+npx n8n@1
 ```
 
 Open http://localhost:5678.
@@ -68,12 +69,55 @@ better brief than anything written down.
 
 Skip this if your real instance has client data in it.
 
-## Not verified against your n8n version
+## Verified
 
-These files were written by hand, not exported from a running n8n, so the node
-type versions (`set` 3.4, `if` 2.2, `httpRequest` 4.2) are best guesses at what
-your instance expects. They match current n8n 1.x.
+All three were imported and executed on **n8n 1.97.1** on this machine, and
+they do what the stickies say:
 
-**Import all three well before the session.** If one refuses to import, it is
-a version mismatch in those numbers and is quick to fix — but not while thirty
-people are watching you.
+| Check | Result |
+|---|---|
+| All three import | 3/3 |
+| `01` computes the total | `total_with_tax: 97` |
+| `02` true branch (`total = 210`) | goes to *Big order — tell the manager*, message renders |
+| `02` false branch (`total = 50`) | goes to *Normal order — just log it* |
+| `03` fails at the HTTP node | `ENOTFOUND` — "The connection cannot be established" |
+
+Node type versions (`set` 3.4, `if` 2.2, `httpRequest` 4.2) are the current
+defaults in 1.97.1.
+
+## Starting n8n on this machine — read this
+
+Plain `npx n8n` **will not work here.** Two reasons:
+
+1. The default `node` on this machine is Anaconda's **v20.12.2**. Current n8n
+   (2.x) requires Node **>= 24**, so npx installs it and then refuses to start.
+2. Node 24 *is* installed via Homebrew, but it is not first on the PATH.
+
+Two options.
+
+**Stay on n8n 1.x (what these files were tested against):**
+
+```bash
+npx n8n@1
+```
+
+Runs on Node 20, no PATH changes, and does not migrate your existing `~/.n8n`
+database.
+
+**Or move to n8n 2.x:**
+
+```bash
+PATH="/opt/homebrew/bin:$PATH" npx n8n
+```
+
+This opens your June database with n8n 2, which **migrates it one way**. There
+is a copy at `~/.n8n-backup-before-v2` taken before any of this. The three
+workflows here have not been tested on 2.x.
+
+If an install ever dies partway with a network timeout, the npx cache is left
+broken and every later run fails with a missing-module error. Clear it and
+start over:
+
+```bash
+rm -rf ~/.npm/_npx
+```

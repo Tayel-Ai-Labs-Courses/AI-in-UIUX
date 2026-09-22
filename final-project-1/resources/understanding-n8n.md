@@ -10,7 +10,7 @@ the three workflows in [`n8n-demo/`](../../n8n-demo). You can run your own
 copy too — it is one command and installs nothing permanently:
 
 ```bash
-npx n8n
+npx n8n@1
 ```
 
 Then open http://localhost:5678 in a browser. That is the whole install.

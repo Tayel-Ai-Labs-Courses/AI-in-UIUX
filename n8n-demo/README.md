@@ -18,6 +18,11 @@ npx n8n@1
 
 Open http://localhost:5678.
 
+**First launch asks you to create an owner account** — email, name, password.
+There is no way to skip it in n8n 1.97; the option was removed. The account is
+local only: it lives in a sqlite file on your machine and is not sent anywhere.
+Create it once, before the session, not while the room waits.
+
 Then import each file: **Workflows → ⋯ (top right) → Import from File**.
 
 Import all three before class, not during it. Do it once on the machine and

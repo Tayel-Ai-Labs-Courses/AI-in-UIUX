@@ -13,6 +13,9 @@ copy too — it is one command and installs nothing permanently:
 npx n8n@1
 ```
 
+On Windows, follow [`setup-windows.md`](setup-windows.md) instead — there are a
+few Windows-specific traps, and it covers Figma too.
+
 Then open http://localhost:5678 in a browser. That is the whole install.
 
 ## The vocabulary you need

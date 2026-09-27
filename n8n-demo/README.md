@@ -28,6 +28,13 @@ Then import each file: **Workflows → ⋯ (top right) → Import from File**.
 Import all three before class, not during it. Do it once on the machine and
 projector you'll actually teach from.
 
+## Before you tell students to install anything
+
+Read [`sharing-your-instance.md`](sharing-your-instance.md). Twenty Windows
+laptops each downloading a gigabyte is a real cost, and for this session there
+is a cheaper option. The student-facing install guide, if you do want it, is
+[`setup-windows.md`](../final-project-1/resources/setup-windows.md).
+
 ## The workflows
 
 | File | Runs for | The point |

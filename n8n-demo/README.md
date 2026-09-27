@@ -30,10 +30,93 @@ projector you'll actually teach from.
 
 ## Before you tell students to install anything
 
-Read [`sharing-your-instance.md`](sharing-your-instance.md). Twenty Windows
+Read [`foundations.md`](foundations.md) first — it is the concepts and the
+nodes, written for designers, with diagrams. Send it to the students too.
+
+Then read [`sharing-your-instance.md`](sharing-your-instance.md). Twenty Windows
 laptops each downloading a gigabyte is a real cost, and for this session there
 is a cheaper option. The student-facing install guide, if you do want it, is
 [`setup-windows.md`](../final-project-1/resources/setup-windows.md).
+
+## The pipelines worth knowing
+
+Almost every real automation is one of these five shapes. Show them the shapes,
+not the four hundred integrations — a designer who recognises these can read
+any canvas they are handed.
+
+### 1. Collect → store → notify
+
+The most common automation on earth.
+
+```mermaid
+flowchart LR
+    A([Form submitted]) --> B[Tidy the fields] --> C[(Save to sheet)] --> D[Notify the team]
+```
+
+*"When someone fills my contact form, add them to my sheet and message me."*
+
+**Design note:** the user only ever notices this one when it stops working.
+Silence is the normal state. That makes the failure notification the entire
+user experience.
+
+### 2. Scheduled report
+
+```mermaid
+flowchart LR
+    A([Every day at 8am]) --> B[Fetch yesterday's data] --> C[Filter and total] --> D[Email the summary]
+```
+
+*"Every morning, send me what sold yesterday."*
+
+**Design note:** runs while nobody is watching. If it fails at 8am on a Friday,
+when does the user find out? Your dashboard is the answer to that question.
+
+### 3. Webhook → transform → respond
+
+```mermaid
+flowchart LR
+    A([URL is called]) --> B[Reshape the payload] --> C{Valid?}
+    C -->|yes| D[Do the work]
+    C -->|no| E[Respond with an error]
+```
+
+*"When the payment provider calls us, record the order."*
+
+**Design note:** this fires unattended, often, and fast. A hundred runs an hour
+is normal. A run list designed for three runs a day falls apart here.
+
+### 4. Route by condition
+
+```mermaid
+flowchart LR
+    A([New ticket]) --> B{How urgent?}
+    B -->|high| C[Page someone]
+    B -->|normal| D[Add to queue]
+    B -->|spam| E[Drop it]
+```
+
+*"Urgent ones wake someone up, the rest wait until morning."*
+
+**Design note:** this is the canvas problem in miniature. Three routes fit on
+screen. Eight do not. How do you show a user which route *their* item took,
+without making them read the whole map?
+
+### 5. Anything → AI → act on the answer
+
+```mermaid
+flowchart LR
+    A([Email arrives]) --> B[Ask a model to classify it] --> C{Complaint?}
+    C -->|yes| D[Escalate]
+    C -->|no| E[Auto-reply]
+```
+
+*"Read the email, decide what it is, handle it."*
+
+**Design note:** the AI step takes seconds and sometimes returns nonsense. Two
+design problems fall out of that: waiting, and doubt. How does the interface
+show that a step is *thinking*, and how does a user check whether it thought
+correctly? Very few products answer this well — which makes it worth designing.
+
 
 ## The workflows
 

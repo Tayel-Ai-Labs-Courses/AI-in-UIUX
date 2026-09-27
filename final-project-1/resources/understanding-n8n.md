@@ -18,6 +18,10 @@ few Windows-specific traps, and it covers Figma too.
 
 Then open http://localhost:5678 in a browser. That is the whole install.
 
+Before you touch it, read [`foundations.md`](../../n8n-demo/foundations.md).
+It is the concepts and the nodes with diagrams, written for designers — fifteen
+minutes, and the hour you spend in n8n afterwards is worth far more.
+
 ## The vocabulary you need
 
 | Term | What it actually is |

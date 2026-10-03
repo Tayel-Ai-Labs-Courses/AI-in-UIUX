@@ -38,6 +38,11 @@ laptops each downloading a gigabyte is a real cost, and for this session there
 is a cheaper option. The student-facing install guide, if you do want it, is
 [`setup-windows.md`](../final-project-1/resources/setup-windows.md).
 
+For the other half of the course — n8n as a tool that works *for* designers
+rather than one they redesign — see
+[`automations-for-designers.md`](automations-for-designers.md). It has the
+integrations, five pipelines they could actually use, and three project ideas.
+
 ## The pipelines worth knowing
 
 Almost every real automation is one of these five shapes. Show them the shapes,
